@@ -3,6 +3,32 @@ const resturantSearchButton = document.querySelector('.searchButton')
 const resturantSearchByKeyword = document.querySelector('#name')
 const mainOutputDiv =  document.querySelector('.main_card_container .content')
 
+//Function that generates HTML once all the data is fetched
+
+const generateHTML = function(res) {
+
+   const html =  
+    ` 
+    <div class="resturant">
+        <div class="img">
+        <img src="${res.restaurant.featured_image}">
+        </div>
+        <h5>${res.restaurant.establishment[0]}</h5>
+        <h3><a target="_blank"href="${res.restaurant.events_url}">${res.restaurant.name}</a></h3>
+        <h4>${res.restaurant.user_rating.rating_text}<span class="score" style="background:#${res.restaurant.user_rating.rating_color};">${res.restaurant.user_rating.aggregate_rating}</span>  (${res.restaurant.user_rating.votes} votes)</h4>
+        <h4>${res.restaurant.location.locality}</h4>
+        <h5>${res.restaurant.location.address}</h5>
+        <div class="extra_info">
+        <p>CUISINES:<span>${res.restaurant.cuisines}</span></p>
+        <p>COST FOR TWO:<span class="cost">£${res.restaurant.average_cost_for_two}</span></p>
+        <p>HOURS:<span class="hrs">${res.restaurant.timings}</span></p>
+        </div>
+</div>
+`
+
+mainOutputDiv.insertAdjacentHTML('beforeend', html)
+
+}
 
 
 //FIRSTLY GATHER THE LATITUDE AND LONGITUDE OF THE DEVICES LOCATION
@@ -38,24 +64,8 @@ const mainOutputDiv =  document.querySelector('.main_card_container .content')
                 
                 //LOOP OVER THE RETURNED ARRAY
                 returnedResturants.forEach((res) => {
-                    const html = 
-                    `       <div class="resturant">
-                            <div class="img">
-                            <img src="${res.restaurant.featured_image}">
-                            </div>
-                            <h5>${res.restaurant.establishment[0]}</h5>
-                            <h3><a target="_blank"href="${res.restaurant.events_url}">${res.restaurant.name}</a></h3>
-                            <h4>${res.restaurant.user_rating.rating_text}<span class="score" style="background:#${res.restaurant.user_rating.rating_color};">${res.restaurant.user_rating.aggregate_rating}</span>  (${res.restaurant.user_rating.votes} votes)</h4>
-                            <h4>${res.restaurant.location.locality}</h4>
-                            <h5>${res.restaurant.location.address}</h5>
-                            <div class="extra_info">
-                            <p>CUISINES:<span>${res.restaurant.cuisines}</span></p>
-                            <p>COST FOR TWO:<span class="cost">£${res.restaurant.average_cost_for_two}</span></p>
-                            <p>HOURS:<span class="hrs">${res.restaurant.timings}</span></p>
-                            </div>
-                        </div>
-                    `
-                    mainOutputDiv.insertAdjacentHTML('beforeend', html)
+                   generateHTML(res)
+                    
                    })
             }
 
@@ -109,25 +119,8 @@ const mainOutputDiv =  document.querySelector('.main_card_container .content')
 
 
                  restaurant.forEach((res) => {
-                    const html = 
-                            `       <div class="resturant">
-                                    <div class="img">
-                                    <img src="${res.restaurant.featured_image}">
-                                    </div>
-                                    <h5>${res.restaurant.establishment[0]}</h5>
-                                    <h3><a target="_blank"href="${res.restaurant.events_url}">${res.restaurant.name}</a></h3>
-                                    <h4>${res.restaurant.user_rating.rating_text}<span class="score"style="background:#${res.restaurant.user_rating.rating_color};">${res.restaurant.user_rating.aggregate_rating}</span>  (${res.restaurant.user_rating.votes} votes)</h4>
-                                    <h4>${res.restaurant.location.locality}</h4>
-                                    <h5>${res.restaurant.location.address}</h5>
-                                    <div class="extra_info">
-                                    <p>CUISINES:<span>${res.restaurant.cuisines}</span></p>
-                                    <p>COST FOR TWO:<span class="cost">£${res.restaurant.average_cost_for_two}</span></p>
-                                    <p>HOURS:<span class="hrs">${res.restaurant.timings}</span></p>
-                                    </div>
-                                </div>
-                            `
-                 
-                  mainOutputDiv.insertAdjacentHTML('beforeend', html)
+                    generateHTML(res)
+                    
                  })
              }
              getCuisinesInLocalAreaDrop()
@@ -182,25 +175,8 @@ const mainOutputDiv =  document.querySelector('.main_card_container .content')
        //CREATE THE HTML CONTENT FROM THE DATA FETCHED FROM THE API
 
                    restaurant.forEach((res) => {
-                    const html = 
-                   `     <div class="resturant">
-                             <div class="img">
-                                <img src="${res.restaurant.featured_image}">
-                             </div>
-
-                            <h5>${res.restaurant.establishment[0]}</h5>
-                            <h3><a target="_blank"href="${res.restaurant.events_url}">${res.restaurant.name}</a></h3>
-                            <h4>${res.restaurant.user_rating.rating_text}<span class="score" style="background:#${res.restaurant.user_rating.rating_color};">${res.restaurant.user_rating.aggregate_rating}</span>  (${res.restaurant.user_rating.votes} votes)</h4>
-                            <h4>${res.restaurant.location.locality}</h4>
-                            <h5>${res.restaurant.location.address}</h5>
-                            <div class="extra_info">
-                            <p>CUISINES:<span>${res.restaurant.cuisines}</span></p>
-                            <p>COST FOR TWO:<span class="cost">£${res.restaurant.average_cost_for_two}</span></p>
-                            <p>HOURS:<span class="hrs">${res.restaurant.timings}</span></p>
-                            </div>
-                        </div>
-                    `
-                    mainOutputDiv.insertAdjacentHTML('beforeend', html)
+                    generateHTML(res)
+                    
                    })
                }
 
@@ -231,35 +207,10 @@ const mainOutputDiv =  document.querySelector('.main_card_container .content')
         //CREATE THE HTML CONTENT FROM THE DATA FETCHED FROM THE API
 
         resturants.forEach((res) => {
-            console.log(res.restaurant.name)  
-                const html = 
-               
-                `
-                    <div class="resturant">
-                        <div class="img">
-                        <img src="${res.restaurant.featured_image}">
-                        </div>
-                        <h5>${res.restaurant.establishment[0]}</h5>
-                        <h3><a target="_blank"href="${res.restaurant.events_url}">${res.restaurant.name}</a></h3>
-                        <h4>${res.restaurant.user_rating.rating_text} <span class="score"style="background:#${res.restaurant.user_rating.rating_color};"> ${res.restaurant.user_rating.aggregate_rating}</span>  (${res.restaurant.user_rating.votes} Votes)</h4>
-                        <h4>${res.restaurant.location.locality}</h4>
-                        <h5>${res.restaurant.location.address}</h5>
-                        <div class="extra_info">
-                        <p>CUISINES:<span>${res.restaurant.cuisines}</span></p>
-                        <p>COST FOR TWO:<span class="cost">£${res.restaurant.average_cost_for_two}</span></p>
-                        <p>HOURS:<span class="hrs">${res.restaurant.timings}</span></p>
-                        </div>
-                    </div>
-
-                  
-                `
-               
-
-                mainOutputDiv.insertAdjacentHTML('beforeend', html)
+            generateHTML(res)
+                    
         })
-
-            
-        }
+ }
         
         
     getRes()
