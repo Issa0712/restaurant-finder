@@ -63,7 +63,7 @@ a{
             }
           
             .searchButton {
-                width: 50px;
+                width: 70px;
                 height: 30px;
                 background: $primaryColor;
                 color: white;
@@ -71,6 +71,9 @@ a{
                 border: none;
                 font-family: $primaryFont;
                 cursor: pointer;
+                &:hover{
+                    background: lightcoral;
+                }
             }
         }
         
@@ -377,8 +380,12 @@ a{
         }
 
     }
-   
-   
-    
+} 
 
-}
+@media screen and (max-width: 320px) {
+    header .title_wrapper .search_wrapper .searchButton {
+        display: none;
+        width: 55px;
+        padding: 5px;
+
+}}
